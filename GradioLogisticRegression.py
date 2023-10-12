@@ -2,7 +2,7 @@ import gradio as gr
 import numpy as np
 import matplotlib.pyplot as plt
 
-def logisticregression(a_in,epoch_in):
+def logisticregression(a_in,epoch_in,progress=gr.Progress()):
     #### generate random data-set ####
 
     #np.random.seed(0) # set random seed (optional)
@@ -40,7 +40,7 @@ def logisticregression(a_in,epoch_in):
     for n in range (epoch):
         iterat[n] = n
 
-    for p in range (epoch):
+    for p in progress.tqdm(range(epoch), desc="Calculating Loss"):
         L, J = np.matrix([[0.0, 0.0, 0.0]]), 0.0 # reset gradient (∂J(w)/∂w) and loss for each epoch
         #### Code the equations to solve for the loss and to update 
         #### the weights and biases for each epoch below. 
@@ -102,4 +102,4 @@ with gr.Blocks() as demo:
         btn = gr.Button("Run")
     btn.click(fn=logisticregression, inputs=inp, outputs=[out,plot1,plot2])
 
-demo.launch()
+demo.queue().launch()
