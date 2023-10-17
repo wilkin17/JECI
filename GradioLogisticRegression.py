@@ -97,7 +97,7 @@ with gr.Blocks() as demo:
         out = gr.Textbox(label="Loss")
     with gr.Row():
         plot1 = gr.Plot(min_width=170)
-        plot2 = gr.Plot(min_width=170)
+        plot2 = gr.Plot(min_width=180)
     with gr.Row():
         btn = gr.Button("Run")
     btn.click(fn=logisticregression, inputs=inp, outputs=[out,plot1,plot2])
